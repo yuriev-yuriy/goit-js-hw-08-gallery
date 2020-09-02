@@ -60,6 +60,7 @@ body {
 }
 
 /* Lightbox */
+/* серая подложка backdrop или overlay */
 .lightbox {
   position: fixed;
   top: 0;
