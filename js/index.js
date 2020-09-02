@@ -1,5 +1,5 @@
 "use strict";
-import pictures from "./gallery-items.js";
+import pictures from "../gallery-items.js";
 
 const listRef = document.querySelector(".js-gallery");
 const modalImgRef = document.querySelector(".lightbox__image");
