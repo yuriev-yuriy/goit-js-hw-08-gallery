@@ -8,14 +8,15 @@ const closeModalBtn = document.querySelector(
   "button[data-action=close-lightbox]"
 );
 const divModalGrey = document.querySelector(".lightbox__content");
-const imgRef = document.createElement("img");
 
 // Шаг 1 - создаю и вешаю разметку в HTML
 const createGallery = (preview, original, description) => {
   const liRef = document.createElement("li");
   liRef.classList.add("gallery__item");
+
   const linkRef = document.createElement("a");
   linkRef.classList.add("gallery__link");
+
   const imgRef = document.createElement("img");
   imgRef.classList.add("gallery__image");
   liRef.appendChild(linkRef);
@@ -25,29 +26,22 @@ const createGallery = (preview, original, description) => {
   imgRef.src = preview;
   imgRef.dataset.source = original;
   imgRef.alt = description;
-
   return liRef;
 };
 
 // Шаг 2 - Реализация делегирования на галерее ul.js - gallery и получение url большого изображения.
-listRef.addEventListener("click", onGalleryClick);
-function onGalleryClick(event) {
-  event.preventDefault();
-  if (event.target.nodeName !== "IMG") {
-    return;
-  }
-  const linkRef = document.querySelector("ul > li > a");
-  const imgRef = event.target;
-  linkRef.src = imgRef.dataset.source;
-}
+listRef.addEventListener("click", onOpenModal);
 
 // Шаг 3 открытие и закрытие модального окна
-
-imgRef.addEventListener("click", onOpenModal);
 closeModalBtn.addEventListener("click", onCloseModal);
 divModalGrey.addEventListener("click", onGreyClick);
 
 function onOpenModal() {
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+  const imgRef = event.target;
   openDivModal.classList.add("is-open");
   // Шаг 4 Подмена значения атрибута src элемента img.lightbox__image
   modalImgRef.src = imgRef.dataset.source;
@@ -74,9 +68,6 @@ function onPressEsc(event) {
     console.log("Close");
   }
 }
-
-//   return liRef;
-// };
 
 pictures.forEach((picture) => {
   const liElem = createGallery(
